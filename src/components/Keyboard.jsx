@@ -1,6 +1,22 @@
-// Function Keyboard avec comme propos : onLetterClick pour appeler la fonction parent, guessedLetters pour savoir quelles lettres ont déjà été devinées, et disabledBtn pour désactiver le clavier si le jeu est terminé.
+import { useEffect } from "react"
+
 export function Keyboard({ onLetterClick, guessedLetters, disabledBtn }) {
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('') // Split permet de décoper la string en un tableau de lettres
+
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            const letter = event.key.toLowerCase(); // Convertit la lettre en minuscule pour la comparer avec les lettres devinées
+
+            if (letter >= 'a' && letter <= 'z' && !guessedLetters.includes(letter) && !disabledBtn) {
+                onLetterClick(letter);
+            }
+        }
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [onLetterClick, guessedLetters, disabledBtn])
 
     return (
         <div className="keyboard">

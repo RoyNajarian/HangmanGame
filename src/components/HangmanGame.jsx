@@ -39,7 +39,10 @@ export function HangmanGame() {
     
     let result = "";
     for (let letter of word) { 
-      if (guessedLetters.includes(letter)) {
+      if (letter === "-") {
+        result += "\u00A0\u00A0";  // \u00A0 est le code pour un "espace forcé" en HTML. 
+      } 
+      else if (guessedLetters.includes(letter)) {
         result += letter + " "; // Affiche la lettre si elle a été devinée
       } 
       else {
@@ -53,7 +56,7 @@ export function HangmanGame() {
   let isWon = true;
   if (word !== null) {
     for (let letter of word) {
-      if (!guessedLetters.includes(letter)) {
+      if (letter !== "-" && !guessedLetters.includes(letter)) {
         isWon = false;
         break;
       }
@@ -74,7 +77,6 @@ export function HangmanGame() {
 
   return (
     <div className="container">
-        {word}
         <p className="word">{displayWord()}</p>
 
         <p className="tries">Essais restants: {maxWrongGuesses - wrongGuesses}</p>

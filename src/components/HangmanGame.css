@@ -1,0 +1,196 @@
+:root {
+  --bg-color: #ffe600;
+  --color-primary: #ff0055;
+  --color-secondary: #00d4ff;
+  --outline-thick: #222222;
+  
+  --font-title: 'Bangers', cursive;
+  --font-game: 'Patrick Hand', cursive;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+  background-image: radial-gradient(var(--color-primary) 15%, transparent 16%), radial-gradient(var(--color-primary) 15%, transparent 16%);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  
+  font-family: var(--font-game);
+  color: var(--outline-thick);
+}
+
+.Affichage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.Affichage h1 {
+  font-family: var(--font-title);
+  font-weight: normal; /* Force le poids normal (Bangers est prévu pour 400) */
+  font-size: clamp(4rem, 10vw, 8rem);
+  color: #ffffff;
+  margin-top: 1rem;
+  margin-bottom: 6rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+  
+  -webkit-text-stroke: 3px var(--outline-thick);
+  text-shadow: 6px 6px 0px var(--color-secondary), 8px 8px 0px var(--outline-thick);
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 3rem;
+  
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  border: 5px solid var(--outline-thick);
+  box-shadow: 12px 12px 0px var(--outline-thick);
+  
+  width: 90vw; 
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  
+  transform: rotate(1deg);
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  bottom: -35px;
+  right: 15%;
+  border-width: 40px 40px 0 0;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+  display: block;
+  width: 0;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  bottom: -43px;
+  right: calc(15% - 2px);
+  border-width: 45px 44px 0 0;
+  border-style: solid;
+  border-color: var(--outline-thick) transparent transparent transparent;
+  display: block;
+  width: 0;
+}
+
+.word {
+  font-size: clamp(1rem, 3.5vw, 5.5rem);
+  font-family: var(--font-title);
+  letter-spacing: clamp(1px, 1vw, 12px);
+  color: var(--color-primary);
+  margin: 1rem 0;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-text-stroke: 2px var(--outline-thick);
+  text-shadow: 4px 4px 0px var(--outline-thick);
+}
+
+.tries {
+  font-size: 1.8rem;
+  font-weight: bold;
+  background-color: var(--outline-thick);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transform: rotate(-2deg);
+  margin-bottom: 2rem;
+  border: 3px dashed #fff;
+  box-shadow: 0 0 0 4px var(--outline-thick);
+}
+
+.keyboard {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.keyboard button {
+  background-color: var(--color-secondary);
+  color: var(--outline-thick);
+  font-family: var(--font-title);
+  font-size: 2rem;
+  width: clamp(55px, 6vw, 70px);
+  height: clamp(55px, 6vw, 70px);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  border: 4px solid var(--outline-thick);
+  box-shadow: 5px 5px 0px var(--outline-thick);
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.keyboard button:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: #fff;
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0px var(--outline-thick);
+}
+
+.keyboard button:active:not(:disabled) {
+  transform: translate(5px, 5px);
+  box-shadow: 0px 0px 0px var(--outline-thick);
+}
+
+.keyboard button:disabled {
+  background-color: #d1d1d1;
+  color: #888;
+  border-color: #888;
+  transform: translate(5px, 5px);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.win, .lose {
+  font-family: var(--font-title);
+  font-size: 3rem;
+  color: #ffffff;
+  margin-top: 3rem;
+  padding: 1.5rem 3rem;
+  text-align: center;
+  white-space: nowrap; 
+  clip-path: polygon(5% 5%, 100% 0%, 95% 95%, 0% 100%);
+  border: 5px solid var(--outline-thick);
+  
+  -webkit-text-stroke: 2px var(--outline-thick);
+  animation: splashIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.win {
+  background-color: #00ff00;
+  box-shadow: 8px 8px 0px var(--outline-thick);
+}
+
+.lose {
+  background-color: #ff00ff;
+  box-shadow: 8px 8px 0px var(--outline-thick);
+}
+
+@keyframes splashIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.1) rotate(20deg);
+  }
+  70% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
