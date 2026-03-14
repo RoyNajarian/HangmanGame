@@ -7,7 +7,7 @@ export function Keyboard({ onLetterClick, guessedLetters, disabledBtn }) {
         const handleKeyDown = (event) => {
             const letter = event.key.toLowerCase(); // Convertit la lettre en minuscule pour la comparer avec les lettres devinées
 
-            if (letter >= 'a' && letter <= 'z' && !guessedLetters.includes(letter) && !disabledBtn) {
+            if (letter.length === 1 && letter >= 'a' && letter <= 'z' && !guessedLetters.includes(letter) && !disabledBtn) {
                 onLetterClick(letter);
             }
         }
