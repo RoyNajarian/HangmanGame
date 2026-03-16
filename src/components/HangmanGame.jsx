@@ -1,8 +1,8 @@
-/* --- IMPORT --- */
 import { useState, useEffect } from "react";
 import { Keyboard } from "./Keyboard";
 import { Popup } from "./Popup";
 import "./HangmanGame.css";
+
 const trad = {
   fr: {
     locale: "fr-FR",
@@ -43,10 +43,10 @@ export function HangmanGame() {
   const fetchAPI = (currentLang) => {
     fetch("http://localhost:3333/", {
       method: "POST",
-  body: new URLSearchParams({ locale: currentLang }),
+      body: new URLSearchParams({ locale: currentLang }),
     })
-  .then((response) => response.json())
-  .then((data) => setWord(data.word));
+      .then((response) => response.json())
+      .then((data) => setWord(data.word));
   };
 
   useEffect(() => {
@@ -54,35 +54,36 @@ export function HangmanGame() {
   }, []);
 
   const restartGame = () => {
-  setWord(null);
-  setGuessedLetters([]);
-  setWrongGuesses(0);
-  setHasStarted(true);
-  fetchAPI(trad[lang].locale);
+    setWord(null);
+    setGuessedLetters([]);
+    setWrongGuesses(0);
+    setHasStarted(true);
+    fetchAPI(trad[lang].locale);
   };
 
   const changeLang = () => {
     let newLang;
     if (lang === "fr") {
       newLang = "en";
-    } else {
+    } 
+    else {
       newLang = "fr";
     }
-    setLang(newLang)
+    setLang(newLang);
   };
 
   const letterClickHandler = (letter) => {
-  if (!word) {
+    if (!word) {
       return;
     }
-  setGuessedLetters([...guessedLetters, letter]);
-  if (!word.toLowerCase().includes(letter)) {
+    setGuessedLetters([...guessedLetters, letter]);
+    if (!word.toLowerCase().includes(letter)) {
       setWrongGuesses(wrongGuesses + 1);
     }
   };
 
   const displayWord = () => {
-  if (!word) {
+    if (!word) {
       return;
     }
 
@@ -95,7 +96,7 @@ export function HangmanGame() {
         result += letter + " ";
       } 
       else {
-        result += "_ "; 
+        result += "_ ";
       }
     }
     return result;
@@ -171,9 +172,8 @@ export function HangmanGame() {
     <>
       <div className="container">
         <p className="word">{displayWord()}</p>
-        <p className="tries">
-            {trad[lang].tries} {maxWrongGuesses - wrongGuesses}
-        </p>
+        <p className="tries">{trad[lang].tries} {maxWrongGuesses - wrongGuesses}</p>
+
         <Keyboard
           onLetterClick={letterClickHandler}
           guessedLetters={guessedLetters}
