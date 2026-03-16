@@ -3,7 +3,7 @@ import './Popup.css';
 export function Popup({ title, message, buttonText, onButtonClick, type, changeLangFonction, langLabelText, langContext }) {
     return (
         <div className="popup">
-            <div className={`popup-content ${type}`}> {/* ${type} sert à définir le style du popup en fonction de son type (victoire, défaite, etc.) */}
+            <div className={`popup-content ${type}`}>
                 
                 <h2>{title}</h2>
                 <p>{message}</p>
